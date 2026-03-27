@@ -1,0 +1,20 @@
+{
+  "watch": ["."],
+  "ignore": [
+    "node_modules",
+    "dist",
+    "coverage",
+    "*.test.ts",
+    "*.spec.ts"
+  ],
+  "ext": "ts,json",
+  "exec": "ts-node --transpile-only --files ./index.ts",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "signal": "SIGTERM",
+  "delay": "200",
+  "restartable": "rs",
+  "verbose": false,
+  "legacyWatch": false
+}
