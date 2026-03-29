@@ -1,0 +1,47 @@
+# 🛠 Katkı Rehberi (Contributing Guide)
+
+Projeye katkı sağlamak istediğin için teşekkürler! Geliştirme sürecini standart tutmak için lütfen aşağıdaki adımları takip et.
+
+---
+
+## ⚡ Hızlı Başlangıç
+
+1. **Fork & Clone:** Projeyi fork'la ve bilgisayarına çek.
+2. **Branch:** Yeni bir dal aç: `git checkout -b tip/baslik` (Örn: `feat/login-page`)
+3. **Geliştir:** Next.js standartlarına (app router, server components) uygun geliştirme yap.
+4. **Test:** `npm run build` ile hata olmadığından emin ol.
+5. **PR:** Değişikliklerini gönder ve Pull Request oluştur.
+
+---
+
+## 📋 Kurallar ve Standartlar
+
+### 🏗 Kodlama Standartları
+* **TypeScript:** any kullanımından mümkün olduğunca kaçın, tip güvenliğini koru.
+* **Express:** Route, controller ve service katmanlarını ayır.
+* **Async/Await:** Callback yerine async/await kullan.
+* **Hata Yönetimi:** Global error handler kullan, try/catch bloklarını doğru konumlandır.
+* **Güvenlik:** .env dosyalarını asla commit'leme.
+* **Mimari:** `shared/`, `config/` ve `modules/` klasör yapısına sadık kal. moolitich Domain Draven Desing yapısını koru.
+
+### ✍️ Commit Mesajları (Conventional Commits)
+* `feat:` Yeni bir özellik.
+* `fix:` Bir hatanın düzeltilmesi.
+* `docs:` Dokümantasyon güncellemeleri.
+* `refactor:` Kod iyileştirmesi (özellik eklemeden).
+* `chore:` Bakım, bağımlılık güncellemeleri vb.
+
+---
+
+## 🚀 Pull Request (PR) Süreci
+
+* **Açıklama:** PR'ın neyi çözdüğünü ve nasıl test edileceğini kısaca belirt.
+* **Bağlantı:** Varsa ilgili Issue numarasını `Closes #123` şeklinde ekle.
+* **Kapsam:** Büyük değişiklikleri parçalara böl veya detaylı bir şekilde belirt.
+
+---
+
+## 🐛 Sorun Bildirme
+Bir hata bulduysan issues sekmesinden bildirebilirsin.
+
+Katkıların için teşekkürler! 🚀
