@@ -1,5 +1,5 @@
 {
-  "name": "gallery-backent",
+  "name": "auth-backend",
   "version": "1.0.0",
   "description": "",
   "main": "./index.ts",
