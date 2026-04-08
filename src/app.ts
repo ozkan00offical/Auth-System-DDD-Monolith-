@@ -6,6 +6,6 @@ const app = express()
 app.use(express.json({ limit: "10kb" }));
 app.use(express.urlencoded({ extended: true, limit: "10kb" }));
 
-app.use("/users", userRouter);
+app.use("/auth", userRouter);
 
 export default app;

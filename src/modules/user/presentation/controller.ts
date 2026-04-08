@@ -2,6 +2,12 @@ import type { Request, Response, NextFunction } from "express";
 import type { CreateUserInput, UpdateUserInput } from "../domain/types.ts";
 import * as userUseCases from "../application/index.ts";
 
+/**
+import { createJWT, verifyJWT } from "../../../shared/lib/jwt.ts";
+
+Oturum yönetimi için JWT oluşturma ve onaylama fonksiyonlarının bulunduğu dosya
+*/
+
 const assertStringParam = (param: string | string[] | undefined, name: string): string => {
   if (!param || Array.isArray(param)) {
     throw new Error(`Invalid ${name} parameter`);
