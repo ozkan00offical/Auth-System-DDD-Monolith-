@@ -3,16 +3,16 @@ import {
   createUserController,
   updateUserController,
   deleteUserController,
-  findUserByEmailController,
-  findAllUsersController
+  findAllUsersController,
+  loginController
 } from "./controller.ts";
 
 const userRouter = Router();
 
 userRouter.post("/", createUserController);
+userRouter.post("/login", loginController)
 userRouter.put("/:id", updateUserController);
 userRouter.delete("/:id", deleteUserController);
-userRouter.get("/email/:email", findUserByEmailController);
 userRouter.get("/", findAllUsersController);
 
 export default userRouter;

@@ -1,12 +1,7 @@
 import type { Request, Response, NextFunction } from "express";
 import type { CreateUserInput, UpdateUserInput } from "../domain/types.ts";
 import * as userUseCases from "../application/index.ts";
-
-/**
-import { createJWT, verifyJWT } from "../../../shared/lib/jwt.ts";
-
-Oturum yönetimi için JWT oluşturma ve onaylama fonksiyonlarının bulunduğu dosya
-*/
+import { createJWT } from "../../../shared/lib/jwt.ts";
 
 const assertStringParam = (param: string | string[] | undefined, name: string): string => {
   if (!param || Array.isArray(param)) {
@@ -14,6 +9,9 @@ const assertStringParam = (param: string | string[] | undefined, name: string): 
   }
   return param;
 };
+
+const JWT_ISSUER = "APP";
+const JWT_AUDIENCE = "AUTH";
 
 export const createUserController = async (
   req: Request,
@@ -23,7 +21,15 @@ export const createUserController = async (
   try {
     const input: CreateUserInput = req.body;
     const user = await userUseCases.createUser(input);
-    res.status(201).json(user);
+
+    const token = await createJWT(
+      { userId: user.id, email: user.email },
+      JWT_ISSUER,
+      JWT_AUDIENCE,
+      "1h"
+    );
+
+    res.status(201).json({ user, token });
   } catch (err) {
     next(err);
   }
@@ -58,19 +64,33 @@ export const deleteUserController = async (
   }
 };
 
-export const findUserByEmailController = async (
+export const loginController = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
   try {
-    const email = assertStringParam(req.params.email, "email");
-    const user = await userUseCases.findUserByEmail(email);
-    res.status(200).json(user);
+    const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email ve şifre gerekli" });
+    }
+
+    const user = await userUseCases.loginUser(email, password);
+
+    const token = await createJWT(
+      { userId: user.id, email: user.email },
+      JWT_ISSUER,
+      JWT_AUDIENCE,
+      "1h"
+    );
+
+    res.status(200).json({ user: { id: user.id, email: user.email }, token });
   } catch (err) {
     next(err);
   }
 };
+
 
 export const findAllUsersController = async (
   _req: Request,
